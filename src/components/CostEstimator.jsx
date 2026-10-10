@@ -57,7 +57,7 @@ export default function CostEstimator({ onOpenBooking }) {
 
 I would like to book a studio slot or free paint inspection. Please share availability.`;
 
-  const whatsappUrl = `https://wa.me/919696546862?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/918851221573?text=${encodeURIComponent(message)}`;
 
   return (
     <section className="estimator-section" id="estimator">

@@ -5,7 +5,7 @@ export default function FloatingActions() {
     <div className="floating-actions">
       {/* WhatsApp Floating Action */}
       <a
-        href="https://wa.me/919696546862?text=Hello%20Alpha%20Detailers%2C%20I%20am%20interested%20in%20booking%20a%20detailing%20slot%20at%20your%20Delhi%20studio."
+        href="https://wa.me/918851221573?text=Hello%20Alpha%20Detailers%2C%20I%20am%20interested%20in%20booking%20a%20detailing%20slot%20at%20your%20Delhi%20studio."
         target="_blank"
         rel="noopener noreferrer"
         className="fab-btn fab-whatsapp"
@@ -20,15 +20,15 @@ export default function FloatingActions() {
 
       {/* Phone Call Floating Action */}
       <a
-        href="tel:+919696546862"
+        href="tel:+918851221573"
         className="fab-btn fab-call"
-        title="Call Alpha Detailers"
+        title="Call Alpha Detailers: +91 88512 21573 / +91 84478 23046"
         aria-label="Call Alpha Detailers"
       >
         <svg viewBox="0 0 24 24">
           <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
         </svg>
-        <span className="fab-tooltip">Call Desk (+91 96965 46862)</span>
+        <span className="fab-tooltip">Call Desk (+91 88512 21573)</span>
       </a>
     </div>
   );

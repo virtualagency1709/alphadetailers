@@ -67,7 +67,7 @@ ${notes ? `• Special Notes: ${notes}` : ''}
 Please confirm slot availability at your Gamri Village / 5th Pustha Rd studio.`;
 
     const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/919696546862?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/918851221573?text=${encoded}`, '_blank');
     onClose();
   };
 

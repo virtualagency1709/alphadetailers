@@ -108,7 +108,7 @@ export default function LocationSection() {
                   </svg>
                 }
                 title="Direct Helpdesk & WhatsApp"
-                description="+91 96965 46862 • Immediate Studio Slot Confirmation"
+                description="+91 88512 21573 / +91 84478 23046 • Immediate Studio Slot Confirmation"
               />
             </div>
 
@@ -130,7 +130,7 @@ export default function LocationSection() {
               </a>
 
               <a
-                href="tel:+919696546862"
+                href="tel:+918851221573"
                 className="btn btn-secondary studio-btn-secondary"
                 id="btn-call-desk"
                 aria-label="Call Alpha Detailers Studio Desk"

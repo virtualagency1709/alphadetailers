@@ -109,7 +109,7 @@ export default function Hero({ onOpenBooking }) {
 
             {/* Third CTA: WhatsApp Green */}
             <motion.a
-              href="https://wa.me/919696546862?text=Hi%20Alpha%20Detailers%2C%20I%20want%20to%20consult%20regarding%20Ceramic%2FPPF%20for%20my%20car."
+              href="https://wa.me/918851221573?text=Hi%20Alpha%20Detailers%2C%20I%20want%20to%20consult%20regarding%20Ceramic%2FPPF%20for%20my%20car."
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-whatsapp hero-btn hero-btn-whatsapp"

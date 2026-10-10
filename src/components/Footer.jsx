@@ -64,7 +64,11 @@ export default function Footer() {
           </div>
           <div className="footer-contact-item">
             <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
-            <span>+91 96965 46862</span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+              <a href="tel:+918851221573" style={{ color: 'inherit', textDecoration: 'none' }}>+91 88512 21573</a>
+              <span>•</span>
+              <a href="tel:+918447823046" style={{ color: 'inherit', textDecoration: 'none' }}>+91 84478 23046</a>
+            </div>
           </div>
           <div className="footer-contact-item">
             <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" /></svg>
