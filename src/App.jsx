@@ -30,9 +30,6 @@ export default function App() {
 
   return (
     <div className="app-root">
-      {/* Dynamic Ambient Crimson Particle Embers */}
-      <ParticlesCanvas />
-
       {/* Navigation Header */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
