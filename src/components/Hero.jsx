@@ -1,113 +1,172 @@
 import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function Hero({ onOpenBooking }) {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Gentle reveal animation with prefers-reduced-motion fallback
+  const fadeInSlide = (delay = 0, yOffset = 18) =>
+    shouldReduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: yOffset },
+          animate: { opacity: 1, y: 0 },
+          transition: {
+            duration: 0.55,
+            delay,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        };
+
+  const imageReveal = shouldReduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, scale: 0.97, y: 14 },
+        animate: { opacity: 1, scale: 1, y: 0 },
+        transition: {
+          duration: 0.7,
+          delay: 0.2,
+          ease: [0.16, 1, 0.3, 1],
+        },
+      };
+
   return (
-    <section className="hero-section" id="hero">
-      <div className="hero-glow-bg"></div>
+    <section className="hero-section" id="hero" aria-label="Alpha Detailers Automotive Studio Hero">
+      {/* Cinematic Studio Glow & Vignette */}
+      <div className="hero-glow-bg" aria-hidden="true" />
+      <div className="hero-radial-vignette" aria-hidden="true" />
+
       <div className="container hero-grid">
+        {/* Left Column: Studio Content & Conversion Focus */}
         <div className="hero-content">
           
-          {/* Google 5.0 Rating Pill */}
-          <div className="hero-rating-pill">
-            <div className="hero-stars">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} viewBox="0 0 24 24">
-                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                </svg>
-              ))}
-            </div>
-            <span className="hero-rating-text">5.0 GOOGLE VERIFIED • DELHI STUDIO</span>
-          </div>
+          {/* Eyebrow Label */}
+          <motion.div
+            className="hero-eyebrow"
+            {...fadeInSlide(0.05, 12)}
+          >
+            <span className="hero-eyebrow-dot" aria-hidden="true" />
+            <span className="hero-eyebrow-text">PREMIUM AUTOMOTIVE DETAILING • DELHI</span>
+          </motion.div>
 
-          <h1 className="hero-title">
-            UNRIVALED MIRROR GLOSS. <span className="text-gradient-red">ULTIMATE ARMOR.</span>
-          </h1>
+          {/* Main Headline */}
+          <motion.h1
+            className="hero-title"
+            {...fadeInSlide(0.15, 20)}
+          >
+            Protect the Paint.{' '}
+            <br className="hero-title-break" />
+            <span className="hero-title-accent">Elevate the Drive.</span>
+          </motion.h1>
 
-          <p className="hero-desc">
-            Delhi's premier automotive aesthetic sanctuary. Safeguard your prized possession with <strong>Self-Healing TPU Paint Protection Film (PPF)</strong>, surgical <strong>Multi-Stage Paint Correction</strong>, and permanent <strong>10H Diamond Ceramic Coating</strong> inside our dust-free climate bay.
-          </p>
+          {/* Supporting Description */}
+          <motion.p
+            className="hero-desc"
+            {...fadeInSlide(0.25, 18)}
+          >
+            Premium ceramic coating, paint protection film, and expert detailing engineered to keep your car looking exceptional.
+          </motion.p>
 
-          <div className="hero-cta-group">
-            <button
-              className="btn btn-primary open-booking-modal"
+          {/* Primary & Secondary Call To Actions */}
+          <motion.div
+            className="hero-cta-group"
+            {...fadeInSlide(0.35, 16)}
+          >
+            <motion.button
+              type="button"
+              className="btn btn-primary hero-btn-primary open-booking-modal"
               id="hero-cta-primary"
               onClick={() => onOpenBooking()}
+              whileHover={shouldReduceMotion ? {} : { y: -2 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+              aria-label="Book Your Studio Slot at Alpha Detailers"
             >
-              <span>Book Studio Slot</span>
-              <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <span>Book Your Studio Slot</span>
+              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </button>
-            <a href="#estimator" className="btn btn-secondary" id="hero-cta-estimator">
-              <span>Calculate Cost</span>
-              <svg viewBox="0 0 24 24">
-                <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-              </svg>
-            </a>
-            <a
-              href="https://wa.me/919696546862?text=Hi%20Alpha%20Detailers%2C%20I%20want%20to%20consult%20regarding%20Ceramic%2FPPF%20for%20my%20car."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-whatsapp"
-              id="hero-cta-whatsapp"
-            >
-              <svg viewBox="0 0 24 24" style={{ fill: '#fff' }}>
-                <path d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.276-.1-.477-.15-.678.15-.202.3-.78 0.98-.956 1.18-.175.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.895-.799-1.5-1.786-1.676-2.087-.175-.3-.019-.463.132-.613.136-.134.301-.35.452-.525.151-.175.201-.3.301-.501.101-.2.05-.376-.025-.526-.075-.15-.678-1.634-.93-2.239-.244-.589-.493-.509-.678-.519-.176-.009-.377-.009-.578-.009s-.527.075-.803.376c-.276.3-1.055 1.03-1.055 2.513 0 1.482 1.08 2.914 1.23 3.115.151.2 2.126 3.245 5.151 4.551.72.311 1.282.497 1.72.637.724.23 1.382.198 1.903.12.58-.088 1.78-.727 2.03-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2 6.51 2 12.04c0 1.77.46 3.49 1.34 5.01L2 22l5.08-1.33c1.47.8 3.13 1.23 4.96 1.23 5.53 0 10.04-4.51 10.04-10.04S17.57 2 12.04 2z" />
-              </svg>
-              <span>WhatsApp</span>
-            </a>
-          </div>
+            </motion.button>
 
-          {/* Metrics Row */}
-          <div className="hero-stats-row">
-            <div className="stat-item">
-              <span className="stat-num">1,200<span>+</span></span>
-              <span className="stat-label">Cars Perfected</span>
+            <motion.a
+              href="#services"
+              className="btn btn-secondary hero-btn-secondary"
+              id="hero-cta-secondary"
+              whileHover={shouldReduceMotion ? {} : { y: -2 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+              aria-label="Explore Our Services"
+            >
+              <span>Explore Our Services</span>
+              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </motion.a>
+          </motion.div>
+
+          {/* Factually Accurate Trust Indicators */}
+          <motion.div
+            className="hero-trust-bar"
+            {...fadeInSlide(0.45, 14)}
+          >
+            <div className="hero-trust-item">
+              <span className="hero-trust-check" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+              <span className="hero-trust-label">Premium Car Care</span>
             </div>
-            <div className="stat-item">
-              <span className="stat-num">10<span>H</span></span>
-              <span className="stat-label">Hardness Shield</span>
+
+            <span className="hero-trust-separator" aria-hidden="true" />
+
+            <div className="hero-trust-item">
+              <span className="hero-trust-check" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+              <span className="hero-trust-label">Expert Detailing</span>
             </div>
-            <div className="stat-item">
-              <span className="stat-num">10<span>Yr</span></span>
-              <span className="stat-label">PPF Warranty</span>
+
+            <span className="hero-trust-separator" aria-hidden="true" />
+
+            <div className="hero-trust-item">
+              <span className="hero-trust-check" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+              <span className="hero-trust-label">Delhi Studio</span>
             </div>
-            <div className="stat-item">
-              <span className="stat-num">5.0<span>★</span></span>
-              <span className="stat-label">Google Rating</span>
-            </div>
-          </div>
+          </motion.div>
+
         </div>
 
-        {/* Hero Visual Showcase */}
-        <div className="hero-visual-card">
-          <img
-            src="/assets/images/hero-supercar.jpg"
-            alt="Pagani Supercar in Alpha Detailers Studio under Hexagonal Lights"
-            className="hero-car-img"
-          />
-          
-          {/* Interactive Floating Badges */}
-          <div className="floating-badge badge-top-right">
-            <svg viewBox="0 0 24 24" style={{ fill: '#e50914' }}>
-              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
-            </svg>
-            <div className="floating-badge-text">
-              <span className="floating-badge-title">10H Ceramic Hydrophobic</span>
-              <span className="floating-badge-sub">99.8% Water & Swirl Repellent</span>
-            </div>
-          </div>
+        {/* Right Column: Cinematic Automotive Studio Visual */}
+        <motion.div
+          className="hero-visual-wrapper"
+          {...imageReveal}
+        >
+          <div className="hero-visual-frame">
+            <img
+              src="/assets/images/studio-luxury-car.jpg"
+              alt="Ultra-luxury sports car inside Alpha Detailers Delhi modern detailing studio under hexagonal LED illumination"
+              className="hero-car-image"
+              width="1280"
+              height="720"
+              fetchPriority="high"
+              loading="eager"
+            />
 
-          <div className="floating-badge badge-bottom-left">
-            <svg viewBox="0 0 24 24" style={{ fill: '#f59e0b' }}>
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-            </svg>
-            <div className="floating-badge-text">
-              <span className="floating-badge-title">Delhi GMB Verified</span>
-              <span className="floating-badge-sub">5.0 Star Rated Automotive Studio</span>
+            {/* Subtle Studio Lighting Vignette */}
+            <div className="hero-image-vignette" aria-hidden="true" />
+
+            {/* Restrained Studio Bay Indicator */}
+            <div className="hero-studio-status-pill">
+              <span className="status-indicator-dot" aria-hidden="true" />
+              <span className="status-text">CLIMATE BAY • DELHI STUDIO</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
