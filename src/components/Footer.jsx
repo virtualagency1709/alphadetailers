@@ -122,10 +122,25 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 3. Bottom Legal & Slogan */}
+        {/* 3. Bottom Legal & Powered By Credit */}
         <div className="footer-bottom">
           <p>© 2026 ALPHA DETAILERS. All Rights Reserved. Delhi's Accredited Car Detailing Studio.</p>
-          <p className="footer-slogan">Precision • Passion • Perfection</p>
+          <div className="footer-bottom-meta">
+            <span className="footer-slogan">Precision • Passion • Perfection</span>
+            <span className="footer-dot">•</span>
+            <span className="footer-powered-by">
+              Powered by{' '}
+              <a
+                href="https://virtualagency.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="powered-by-link"
+                title="Website Designed & Developed by Virtual Agency"
+              >
+                Virtual Agency
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     </footer>

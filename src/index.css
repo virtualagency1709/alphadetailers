@@ -2856,10 +2856,40 @@ input[type="date"].form-input {
   gap: 0.75rem;
 }
 
+.footer-bottom-meta {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .footer-slogan {
   font-weight: 600;
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-dot {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.footer-powered-by {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
+}
+
+.powered-by-link {
+  color: #ff3b47;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+
+.powered-by-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
 }
 
 /* ===================================================================
@@ -3202,6 +3232,10 @@ input[type="date"].form-input {
     flex-direction: column;
     gap: 0.8rem;
     text-align: center;
+  }
+  .footer-bottom-meta {
+    justify-content: center;
+    gap: 0.5rem;
   }
   .floating-actions {
     bottom: 1.2rem;
