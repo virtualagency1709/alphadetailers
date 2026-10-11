@@ -41,19 +41,34 @@ export default function TrustStrip() {
   ];
 
   return (
-    <section className="trust-strip">
-      <div className="container trust-grid">
-        {trustItems.map((item, idx) => (
-          <div key={idx} className="trust-card">
-            <div className="trust-icon-box">
-              {item.icon}
-            </div>
-            <div className="trust-info">
-              <h4>{item.title}</h4>
-              <p>{item.desc}</p>
-            </div>
+    <section className="trust-strip why-choose-section" id="why-choose-us">
+      <div className="container">
+        <div className="section-header" style={{ marginBottom: '2.5rem' }}>
+          <div className="section-badge">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            Studio Excellence
           </div>
-        ))}
+          <h2 className="section-title">WHY CHOOSE <span className="text-gradient-red">ALPHA DETAILERS</span></h2>
+          <p className="section-subtitle">
+            Delhi NCR's certified automotive studio with clinical-grade infrastructure, dust-evacuated bays, and surgical paint gauge audits.
+          </p>
+        </div>
+
+        <div className="trust-grid">
+          {trustItems.map((item, idx) => (
+            <div key={idx} className="trust-card">
+              <div className="trust-icon-box">
+                {item.icon}
+              </div>
+              <div className="trust-info">
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

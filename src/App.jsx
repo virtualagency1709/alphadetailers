@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import ParticlesCanvas from './components/ParticlesCanvas';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustStrip from './components/TrustStrip';
-import BeforeAfterSlider from './components/BeforeAfterSlider';
 import Services from './components/Services';
+import BeforeAfterSlider from './components/BeforeAfterSlider';
+import TrustStrip from './components/TrustStrip';
+import Process from './components/Process';
 import CostEstimator from './components/CostEstimator';
 import Memberships from './components/Memberships';
-import Process from './components/Process';
-import LocationSection from './components/LocationSection';
 import Testimonials from './components/Testimonials';
+import LocationSection from './components/LocationSection';
 import Faq from './components/Faq';
+import FinalBookingCta from './components/FinalBookingCta';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import FloatingActions from './components/FloatingActions';
@@ -30,42 +31,41 @@ export default function App() {
 
   return (
     <div className="app-root">
-      {/* Navigation Header */}
+      {/* 1. Header Navigation */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
       <main>
-        {/* Hero Section */}
+        {/* 2. Hero Section */}
         <Hero onOpenBooking={handleOpenBooking} />
 
-        {/* Studio Highlights & Trust Strip */}
-        <TrustStrip />
-
-        {/* Interactive Before & After Comparison Slider */}
-        <BeforeAfterSlider />
-
-        {/* 12 Comprehensive Services Grid */}
+        {/* 3. Services Section – Immediately after Hero */}
         <Services onOpenBooking={handleOpenBooking} />
 
-        {/* Dynamic Cost Estimator & WhatsApp Generator */}
-        <CostEstimator onOpenBooking={handleOpenBooking} />
+        {/* 4. Before/After Gallery Slider */}
+        <BeforeAfterSlider />
 
-        {/* Membership & Annual Studio Packages */}
-        <Memberships onOpenBooking={handleOpenBooking} />
+        {/* 5. Why Choose Alpha Detailers */}
+        <TrustStrip />
 
-        {/* 5-Stage Alpha Master Protocol */}
+        {/* 6. Detailing Process (The Alpha Master Protocol) */}
         <Process />
 
-        {/* Delhi Studio Location & Google Verified Card */}
-        <LocationSection />
+        {/* 7. Packages & Pricing / Cost Estimator */}
+        <CostEstimator onOpenBooking={handleOpenBooking} />
+        <Memberships onOpenBooking={handleOpenBooking} />
 
-        {/* Customer Testimonials */}
+        {/* 8. Customer Reviews & Testimonials */}
         <Testimonials />
 
-        {/* FAQ Accordion */}
+        {/* 9. Delhi Studio Location & Contact Details */}
+        <LocationSection />
+
+        {/* 10. FAQ & Final Booking CTA */}
         <Faq />
+        <FinalBookingCta onOpenBooking={handleOpenBooking} />
       </main>
 
-      {/* Studio Footer */}
+      {/* 11. Studio Footer */}
       <Footer />
 
       {/* Direct Booking & Consultation Modal */}
