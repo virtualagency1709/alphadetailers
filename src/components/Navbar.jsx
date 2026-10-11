@@ -19,12 +19,8 @@ export default function Navbar({ onOpenBooking }) {
     <>
       <header className={`site-header ${isScrolled ? 'scrolled' : ''}`} id="navbar">
         <div className="container nav-container">
-          <a href="#" className="brand-logo" id="header-logo-link">
+          <a href="#" className="brand-logo" id="header-logo-link" aria-label="Alpha Detailers Home">
             <img src="/assets/images/alpha-logo.png" alt="Alpha Detailers Shield Logo" className="logo-img" />
-            <div className="brand-text">
-              <span className="brand-name">ALPHA <span>DETAILERS</span></span>
-              <span className="brand-tag">AUTOMOTIVE STUDIO • DELHI</span>
-            </div>
           </a>
 
           {/* Desktop Navigation Links */}
@@ -49,10 +45,11 @@ export default function Navbar({ onOpenBooking }) {
               className="btn btn-primary open-booking-modal"
               id="header-book-btn"
               onClick={() => onOpenBooking()}
+              aria-label="Book Studio Slot at Alpha Detailers"
             >
               <span>Book Studio Slot</span>
-              <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
               </svg>
             </button>
             <button
@@ -61,8 +58,10 @@ export default function Navbar({ onOpenBooking }) {
               aria-label="Toggle Navigation Menu"
               onClick={() => setDrawerOpen(true)}
             >
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
               </svg>
             </button>
           </div>

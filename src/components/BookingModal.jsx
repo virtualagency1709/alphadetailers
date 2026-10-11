@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function BookingModal({ isOpen, onClose, initialService }) {
   const [formData, setFormData] = useState({
@@ -10,12 +10,15 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
     notes: ''
   });
 
+  const formRef = useRef(null);
+
   useEffect(() => {
     if (initialService) {
       setFormData((prev) => ({ ...prev, service: initialService }));
     }
   }, [initialService]);
 
+  // Robust body scroll lock & scroll restoration
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -24,14 +27,41 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
     };
 
     if (isOpen) {
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      document.body.dataset.scrollY = String(scrollY);
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     } else {
+      const scrollY = document.body.dataset.scrollY;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
       document.body.style.overflow = '';
+      if (scrollY !== undefined) {
+        window.scrollTo(0, parseInt(scrollY, 10));
+        delete document.body.dataset.scrollY;
+      }
     }
 
     return () => {
+      const scrollY = document.body.dataset.scrollY;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
       document.body.style.overflow = '';
+      if (scrollY !== undefined) {
+        window.scrollTo(0, parseInt(scrollY, 10));
+        delete document.body.dataset.scrollY;
+      }
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -50,6 +80,17 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
     };
     const key = fieldMap[id] || id;
     setFormData((prev) => ({ ...prev, [key]: value }));
+  };
+
+  // Keep focused input visible when virtual keyboard opens on mobile
+  const handleInputFocus = (e) => {
+    if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) {
+      setTimeout(() => {
+        if (e.target && typeof e.target.scrollIntoView === 'function') {
+          e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 250);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -71,32 +112,56 @@ Please confirm slot availability at your Gamri Village / 5th Pustha Rd studio.`;
     onClose();
   };
 
+  // Disallow past dates
+  const todayDateString = new Date().toISOString().split('T')[0];
+
   return (
     <div
-      className={`modal-overlay ${isOpen ? 'open' : ''}`}
+      className={`modal-overlay ${isOpen ? 'open' : ''} booking-modal`}
       id="booking-modal"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       onClick={(e) => {
-        if (e.target.classList.contains('modal-overlay')) {
+        if (e.target === e.currentTarget || e.target.classList.contains('modal-overlay')) {
           onClose();
         }
       }}
     >
-      <div className="modal-card">
-        <button className="modal-close-btn" aria-label="Close dialog" onClick={onClose}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="modal-header">
-          <h3 className="modal-title" id="modal-title">BOOK YOUR <span className="text-gradient-red">STUDIO SLOT</span></h3>
-          <p className="modal-desc">Reserve your car's climate-controlled bay at Alpha Detailers Delhi.</p>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+        {/* Mobile Pull Handle */}
+        <div className="modal-grab-bar" aria-hidden="true">
+          <div className="modal-grab-indicator" />
         </div>
 
-        <form id="booking-form" onSubmit={handleSubmit}>
+        {/* Pinned Modal Header */}
+        <div className="modal-header">
+          <button
+            className="modal-close-btn"
+            id="modal-close-btn"
+            aria-label="Close booking modal"
+            onClick={onClose}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+          <h3 className="modal-title" id="modal-title">
+            BOOK YOUR <span className="text-gradient-red">STUDIO SLOT</span>
+          </h3>
+          <p className="modal-desc">
+            Reserve your car's climate-controlled bay at Alpha Detailers Delhi.
+          </p>
+        </div>
+
+        {/* Scrollable Form Content */}
+        <form
+          ref={formRef}
+          id="booking-form"
+          className="modal-form-content booking-modal__content"
+          onFocus={handleInputFocus}
+          onSubmit={handleSubmit}
+        >
           <div className="form-row">
             <div className="form-group">
               <label className="form-label" htmlFor="modal-name">Your Full Name</label>
@@ -107,6 +172,7 @@ Please confirm slot availability at your Gamri Village / 5th Pustha Rd studio.`;
                 placeholder="e.g. Rahul Sharma"
                 value={formData.name}
                 onChange={handleChange}
+                autoComplete="name"
                 required
               />
             </div>
@@ -119,6 +185,7 @@ Please confirm slot availability at your Gamri Village / 5th Pustha Rd studio.`;
                 placeholder="e.g. +91 98765 43210"
                 value={formData.phone}
                 onChange={handleChange}
+                autoComplete="tel"
                 required
               />
             </div>
@@ -166,6 +233,7 @@ Please confirm slot availability at your Gamri Village / 5th Pustha Rd studio.`;
               type="date"
               id="modal-date"
               className="form-input"
+              min={todayDateString}
               value={formData.date}
               onChange={handleChange}
               required
@@ -177,15 +245,19 @@ Please confirm slot availability at your Gamri Village / 5th Pustha Rd studio.`;
             <textarea
               id="modal-notes"
               className="form-textarea"
-              rows="2"
+              rows="3"
               placeholder="Tell us if you have swirls, scratches, or prefer pickup & drop in Delhi NCR..."
               value={formData.notes}
               onChange={handleChange}
             />
           </div>
 
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem' }}>
-            <svg viewBox="0 0 24 24">
+          <button
+            type="submit"
+            id="modal-submit-btn"
+            className="btn btn-primary modal-submit-btn"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
             </svg>
             <span>Confirm & Send to Studio WhatsApp</span>

@@ -51,7 +51,7 @@ export default function Hero({ onOpenBooking }) {
                 </svg>
               ))}
             </div>
-            <span className="hero-rating-text">5.0 Rated Automotive Detailing Studio • Delhi</span>
+            <span className="hero-rating-text">5.0 Rated Automotive Detailing Studio · Delhi</span>
           </motion.div>
 
           {/* Bold Main Headline */}
