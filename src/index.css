@@ -2639,64 +2639,140 @@ input[type="date"].form-input {
    FOOTER
    =================================================================== */
 .site-footer {
-  background: #050608;
-  border-top: 1px solid var(--border-subtle);
-  padding: 5rem 0 2.5rem 0;
+  background: linear-gradient(180deg, #07070a 0%, #0d0608 50%, #050507 100%);
+  border-top: 1px solid rgba(229, 9, 20, 0.2);
+  padding: 4.8rem 0 2.2rem 0;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-  gap: 3.5rem;
-  margin-bottom: 4rem;
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 750px;
+  height: 180px;
+  background: radial-gradient(ellipse at top, rgba(229, 9, 20, 0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.footer-brand p {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  margin: 1.2rem 0 1.8rem 0;
-  line-height: 1.7;
-}
-
-.footer-socials {
+/* 1. Centered Brand Hero */
+.footer-brand-hero {
   display: flex;
-  gap: 0.8rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.2rem;
+  position: relative;
+  z-index: 1;
 }
 
-.social-link {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+}
+
+.footer-logo-link:hover {
+  transform: scale(1.05);
+}
+
+.footer-logo-img {
+  width: 145px;
+  max-width: 160px;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 20px rgba(229, 9, 20, 0.28));
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .footer-logo-img {
+    width: 110px;
+    max-width: 120px;
+  }
+}
+
+.footer-hero-desc {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto 1.6rem auto;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.footer-socials-centered {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  transition: all var(--transition-fast);
+  gap: 0.95rem;
+  margin-bottom: 0.5rem;
 }
 
-.social-link:hover {
-  background: var(--crimson-subtle);
-  border-color: var(--primary-red);
+.social-link {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  background: rgba(229, 9, 20, 0.22);
+  border-color: #e50914;
   color: #ffffff;
   transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(229, 9, 20, 0.35);
+  outline: none;
 }
 
 .social-link svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   fill: currentColor;
 }
 
+/* Elegant Divider */
+.footer-hero-divider {
+  height: 1px;
+  width: 100%;
+  max-width: 780px;
+  margin: 2.4rem auto 3.2rem auto;
+  background: linear-gradient(90deg, transparent, rgba(229, 9, 20, 0.25) 50%, transparent);
+}
+
+/* 2. Three-Column Navigation & Studio Details */
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.5rem;
+  margin-bottom: 3.2rem;
+}
+
 .footer-col h4 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 1.4rem;
   position: relative;
   display: inline-block;
+  letter-spacing: 0.02em;
 }
 
 .footer-col h4::after {
@@ -2704,7 +2780,7 @@ input[type="date"].form-input {
   position: absolute;
   bottom: -6px;
   left: 0;
-  width: 25px;
+  width: 24px;
   height: 2px;
   background: var(--primary-red);
 }
@@ -2713,14 +2789,14 @@ input[type="date"].form-input {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
 .footer-links a {
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.9rem;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .footer-links a:hover {
@@ -2731,28 +2807,59 @@ input[type="date"].form-input {
 .footer-contact-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.8rem;
-  margin-bottom: 1.2rem;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
   font-size: 0.88rem;
   color: var(--text-muted);
+  line-height: 1.5;
 }
 
 .footer-contact-item svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   fill: var(--primary-red);
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
+.contact-phones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.contact-phones a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-phones a:hover {
+  color: #ff4d5a;
+}
+
+.phone-sep {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* 3. Footer Bottom */
 .footer-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.85rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.84rem;
   color: var(--text-dim);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-slogan {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* ===================================================================
@@ -2834,8 +2941,9 @@ input[type="date"].form-input {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  .footer-grid {
+  .footer-links-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
   }
 }
 
@@ -3074,12 +3182,25 @@ input[type="date"].form-input {
   .process-steps-grid {
     grid-template-columns: 1fr;
   }
-  .footer-grid {
+  .footer-links-grid {
     grid-template-columns: 1fr;
+    gap: 2.2rem;
+    text-align: center;
+  }
+  .footer-col h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .footer-contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+  .contact-phones {
+    justify-content: center;
   }
   .footer-bottom {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
     text-align: center;
   }
   .floating-actions {
