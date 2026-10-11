@@ -3,6 +3,7 @@ import ParticlesCanvas from './components/ParticlesCanvas';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import WorkShowcase from './components/WorkShowcase';
 import BeforeAfterSlider from './components/BeforeAfterSlider';
 import TrustStrip from './components/TrustStrip';
 import Process from './components/Process';
@@ -41,7 +42,10 @@ export default function App() {
         {/* 3. Services Section – Immediately after Hero */}
         <Services onOpenBooking={handleOpenBooking} />
 
-        {/* 4. Before/After Gallery Slider */}
+        {/* 4. Our Work in Action – Official Instagram Reels Showcase */}
+        <WorkShowcase onOpenBooking={handleOpenBooking} />
+
+        {/* 5. Before/After Gallery Slider */}
         <BeforeAfterSlider />
 
         {/* 5. Why Choose Alpha Detailers */}
